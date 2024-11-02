@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: demo-sso-swagger
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_app_keycloak
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/dev-test
+
+server:
+  port: 8099
+
+keycloak:
+  auth-server-url: http://localhost:8180
+  realm: dev-test
+  resource: dev-api
+  credentials:
+    secret: veaAeAS4ZUuXZ6xqhXe5LiX0nu3KMDBj
+  principal-attribute: preferred_username
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+api:
+  base-url: http://localhost:8099  # Development URL for OpenAPI schema
+
+keycloak-admin:
+  username: admin  # Keycloak admin username
+  password: password  # Keycloak admin password
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
